@@ -40,7 +40,7 @@ class AddWorkday extends React.Component {
     handleAddWorkday(e) {
       e.preventDefault();
       if (!this.state.urakka) {
-        if (!this.props.isValidWorkStartTime(this.state.workday_date_begin)) {
+        if (!this.props.isValidWorkStartTime(this.state)) {
           this.setState(() => {
             return {
             error: "Työvuoron aloitusaika on ennen edellisen työvuoron lopetusaikaa!",
@@ -50,13 +50,15 @@ class AddWorkday extends React.Component {
           return
         }
       }
-      let kek = !this.state.urakka ? 'kek' : 'kak'
+      console.log(this.state)
       let workdayObj = {
         urakka: false,
         workday_date_string: this.state.urakka ?  getDateString(this.state.temp_workday_date_begin, this.state.temp_workday_date_begin) : getDateString(this.state.workday_date_begin, this.state.workday_date_end),
         workday_begin_tod: null,
         workday_end_tod: null,
-        workday_total_hours: !this.state.urakka ? getDateDifferenceInHours(this.state.workday_date_begin, this.state.workday_date_end) : 'Urakka',
+        workday_total_hours: !this.state.urakka ? getDateDifferenceInHours(this.state.workday_date_begin, this.state.workday_date_end) : 
+        ((this.state.workday_date_begin && this.state.workday_date_end) ? 
+        getDateDifferenceInHours(this.state.workday_date_begin, this.state.workday_date_end) + ' (Urakka)' : 'Urakka'), //If we have urakka, we will only count hours if one has input them as they are optional.
         'vehicle_id': null,
         'paulig_amount': null,
         'fazer_amount': null,
@@ -65,8 +67,8 @@ class AddWorkday extends React.Component {
         'pahvit_amount': null,
         'akaa_amount': null,
         'other': null,
-        workday_date_begin_obj: this.state.workday_date_begin,
-        workday_date_end_obj: this.state.workday_date_end,
+        workday_date_begin: this.state.workday_date_begin,
+        workday_date_end: this.state.workday_date_end,
       }
   
       Array.prototype.forEach.call(e.target.elements, function(element) {
@@ -164,12 +166,12 @@ class AddWorkday extends React.Component {
         })
         return
     }
-      let workday_date_obj_begin = new Date(+this.state.workday_date_begin)
-      let workday_date_obj_end = new Date(+this.state.workday_date_begin)
+      let workday_date_begin = new Date(+this.state.workday_date_begin)
+      let workday_date_end = new Date(+this.state.workday_date_begin)
       if (endHoursAreInNextDay(this.state.workday_begin_tod, inputHours)) {
-        workday_date_obj_end.setDate(workday_date_obj_begin.getDate()+1)
+        workday_date_end.setDate(workday_date_begin.getDate()+1)
       }
-      let DateString = workday_date_obj_end.getDate() + '.' + (workday_date_obj_end.getMonth()+1) + '.' + workday_date_obj_end.getFullYear() + ' ' + inputHours
+      let DateString = workday_date_end.getDate() + '.' + (workday_date_end.getMonth()+1) + '.' + workday_date_end.getFullYear() + ' ' + inputHours
       var milliseconds = moment(DateString, "DD.MM.YYYY hh:mm").format('x')
       const date = new Date(parseInt(milliseconds))
       this.setState(() => {
