@@ -16,7 +16,9 @@ class Table extends React.Component {
         <th>Messi</th>
         <th>Pahvit</th>
         <th>Akaa</th>
-        <th>Muuta</th>
+        <th>Kesko</th>
+        <th>Muut</th>
+        <th>Muu selitys</th>
       </tr>
         {objects.map(element => <Row object={element} />)}
       </table>
@@ -57,6 +59,12 @@ class Table extends React.Component {
           <td>
             {object.akaa_amount}
           </td>
+          <td>
+          {object.kesko_amount}
+        </td>
+        <td>
+        {object.other_amount}
+      </td>
           <td>
             {object.other}
           </td>

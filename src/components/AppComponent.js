@@ -1,5 +1,6 @@
-import Table from './TableComponent'
+import WorkHourTable from './TableComponent'
 import AddWorkday from './AddWorkdayComponent'
+import SumTable from './SumComponent'
 import React from 'react'
 import moment from 'moment';
 
@@ -32,8 +33,6 @@ class AppComponent extends React.Component {
       return true
     }
 
-    console.log(newWorkday.workday_date_begin)
-
     for (let item of this.state.workdays) {
       const workdayBeginsBeforeComparedBegins = (moment(newWorkday.workday_date_begin).diff(moment(item.workday_date_begin), true) < 0)
       const workdayBeginsBeforeComparedEnds = (moment(newWorkday.workday_date_begin).diff(moment(item.workday_date_end), true) < 0)
@@ -56,7 +55,8 @@ class AppComponent extends React.Component {
     render() {
       return (
           <div>
-            <Table data={this.state.workdays} handleAddWorkday={this.handleAddWorkday}/>
+            <WorkHourTable data={this.state.workdays} handleAddWorkday={this.handleAddWorkday}/>
+            <SumTable workdays={this.state.workdays}/>
             <AddWorkday handleAddWorkday={this.handleAddWorkday} isValidWorkStartTime={this.isValidWorkStartTime} />
           </div>
       )

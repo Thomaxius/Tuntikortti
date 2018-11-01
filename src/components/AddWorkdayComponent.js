@@ -50,9 +50,8 @@ class AddWorkday extends React.Component {
           return
         }
       }
-      console.log(this.state)
       let workdayObj = {
-        urakka: false,
+        urakka: this.state.urakka,
         workday_date_string: this.state.urakka ?  getDateString(this.state.temp_workday_date_begin, this.state.temp_workday_date_begin) : getDateString(this.state.workday_date_begin, this.state.workday_date_end),
         workday_begin_tod: null,
         workday_end_tod: null,
@@ -66,6 +65,8 @@ class AddWorkday extends React.Component {
         'messi_amount': null,
         'pahvit_amount': null,
         'akaa_amount': null,
+        'kesko_amount': null,
+        'other_amount': null,
         'other': null,
         workday_date_begin: this.state.workday_date_begin,
         workday_date_end: this.state.workday_date_end,
@@ -133,6 +134,9 @@ class AddWorkday extends React.Component {
     }
   
     validateBeginHours(inputHours) {
+      if (this.state.urakka && !inputHours) {
+        return
+      }
       if (!moment(inputHours, "HH:mm", true).isValid()) {
         this.setState(() => {
           return {
@@ -157,6 +161,9 @@ class AddWorkday extends React.Component {
     }
   
     validateEndHours(inputHours) {
+      if (this.state.urakka && !inputHours) {
+        return
+      }
       if (!moment(inputHours, "HH:mm", true).isValid()) {
         this.setState(() => {
           return {
@@ -207,7 +214,9 @@ class AddWorkday extends React.Component {
               </div>
               <div className="tr">
               <span className="td"><span className="td_title">Akaa</span><input type="text" name="akaa_amount" /></span>
-              <span className="td"><span className="td_title">Muuta</span><input type="text" name="other" /> </span>
+              <span className="td"><span className="td_title">Kesko</span><input type="text" name="kesko_amount" /></span>
+              <span className="td"><span className="td_title">Muut</span><input type="text" name="other_amount" /></span>
+              <span className="td"><span className="td_title">Muu selite</span><input type="text" name="other" /> </span>
               </div>
             <br/><button disabled={true ? this.state.error || !inputDataValidated() : false}>Add Workday</button>
             </form>
