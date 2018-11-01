@@ -14,7 +14,6 @@ class SumComponent extends React.Component {
         Merca: 0,
         Messi: 0,
         Pahvit: 0,
-        Paulig: 0,
         Akaa: 0,
         Kesko: 0,
         Other: 0
@@ -35,8 +34,19 @@ class SumComponent extends React.Component {
       let total = 0
       Object.values(totalObj).forEach(element => total += element)
 
-      return "Yhteensä " + total + " (Paulig: " + totalObj.Paulig + `\n` + "\nFazer: " + totalObj.Fazer + "\nMerca: " + totalObj.Merca + 
-      "\nMessi: " + totalObj.Messi + "\nPahvit: " + totalObj.Pahvit + "\nAkaa: " + totalObj.Akaa + "\nKesko: " + totalObj.Kesko + "\nMuut: " + totalObj.Other + ")"
+      return (
+        <span>
+          Yhteensä: {total}<br/>
+          Paulig: {totalObj.Paulig}<br/>
+          Fazer: {totalObj.Fazer}<br/>
+          Merca: {totalObj.Merca}<br/>
+          Messi: {totalObj.Messi}<br/>
+          Pahvit: {totalObj.Pahvit}<br/>
+          Akaa: {totalObj.Akaa}<br/>
+          Kesko: {totalObj.Kesko}<br/>
+          Muut: {totalObj.Other}
+        </span>
+      )
       
 
 
@@ -44,7 +54,6 @@ class SumComponent extends React.Component {
     }
 
     render() {
-      console.log(this.props.workdays.length)
       return (
         <div>
           {(this.props.workdays.length != 0 || this.props.workdays ==! undefined) && <div className="bold">{this.getTotalUrakka(this.props.workdays)}</div>}

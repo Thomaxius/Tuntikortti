@@ -56,6 +56,7 @@ class AppComponent extends React.Component {
       return (
           <div>
             <WorkHourTable data={this.state.workdays} handleAddWorkday={this.handleAddWorkday}/>
+            <br/>
             <SumTable workdays={this.state.workdays}/>
             <AddWorkday handleAddWorkday={this.handleAddWorkday} isValidWorkStartTime={this.isValidWorkStartTime} />
           </div>

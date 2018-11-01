@@ -39,17 +39,16 @@ class AddWorkday extends React.Component {
   
     handleAddWorkday(e) {
       e.preventDefault();
-      if (!this.state.urakka) {
-        if (!this.props.isValidWorkStartTime(this.state)) {
-          this.setState(() => {
-            return {
-            error: "Työvuoron aloitusaika on ennen edellisen työvuoron lopetusaikaa!",
-            className_date: "error",
-          }
-          })
-          return
+      if (!this.props.isValidWorkStartTime(this.state)) {
+        this.setState(() => {
+          return {
+          error: "Työvuorossa on päällekäisyyksiä jo lisätyn työvuoron tai työvuorojen kanssa.",
+          className_date: "error",
         }
+        })
+        return
       }
+      
       let workdayObj = {
         urakka: this.state.urakka,
         workday_date_string: this.state.urakka ?  getDateString(this.state.temp_workday_date_begin, this.state.temp_workday_date_begin) : getDateString(this.state.workday_date_begin, this.state.workday_date_end),
@@ -86,7 +85,7 @@ class AddWorkday extends React.Component {
         error: "",
         error_date: "",
         error_workhours: "",
-        urakka: false,
+        urakka: this.state.urakka,
         inputValue_date: "",
         workday_begin_tod: "",
         temp_workday_date_begin: "",
@@ -197,7 +196,7 @@ class AddWorkday extends React.Component {
         <div className="table">
             <form id="workDayForm" className="tr" onSubmit={this.handleAddWorkday}>
               <div className="tr">
-              <span className="td"><span className="td_title">Urakka</span><input type="checkbox" className={this.state.className_date} name="urakka_checkbox" onClick={this.handleChange_checkbox}/></span>              
+              <span className="td"><span className="td_title">Urakka</span><input  defaultChecked={this.state.urakka} type="checkbox" className={this.state.className_date} name="urakka_checkbox" onClick={this.handleChange_checkbox}/></span>              
               <span className="td"><span className="td_title">Anna PVM</span><input type="text" className={this.state.className_date} name="workday_date_string" onChange={this.handleChange_date} value={this.state.inputValue_date} onBlur={() => this.validateDate(this.state.inputValue_date)} /></span>
               <span className="td"><span className="td_title">Aloitus klo</span><input type="text" placeholder={this.state.urakka ? "Vapaavalintainen" : ''} value={this.state.workday_begin_tod} name="workday_begin_tod" className={this.state.className_workhours} onChange={this.handleChange_workhours_begin} onBlur={() => this.validateBeginHours(this.state.workday_begin_tod)} /></span>
               <span className="td"><span className="td_title">Lopetus klo</span><input type="text" placeholder={this.state.urakka ? "Vapaavalintainen" : ''} value={this.state.workday_end_tod}  name="workday_end_tod" className={this.state.className_workhours} onChange={this.handleChange_workhours_end} onBlur={() => this.validateEndHours(this.state.workday_end_tod)} /></span>
@@ -206,15 +205,15 @@ class AddWorkday extends React.Component {
               <span className="td"><span className="td_title">Auto</span><input type="text" name="vehicle_id" /></span>
               <span className="td"><span className="td_title">Paulig</span><input type="text" name="paulig_amount" /></span>
               <span className="td"><span className="td_title">Fazer</span><input type="text" name="fazer_amount" /></span>
+              <span className="td"><span className="td_title">Merca</span><input type="text" name="merca_amount" /></span>
               </div>
               <div className="tr">
-              <span className="td"><span className="td_title">Merca</span><input type="text" name="merca_amount" /></span>
               <span className="td"><span className="td_title">Messi</span><input type="text" name="messi_amount" /></span>
               <span className="td"><span className="td_title">Pahvit</span><input type="text" name="pahvit_amount" /></span>
-              </div>
-              <div className="tr">
               <span className="td"><span className="td_title">Akaa</span><input type="text" name="akaa_amount" /></span>
               <span className="td"><span className="td_title">Kesko</span><input type="text" name="kesko_amount" /></span>
+              </div>
+              <div className="tr">
               <span className="td"><span className="td_title">Muut</span><input type="text" name="other_amount" /></span>
               <span className="td"><span className="td_title">Muu selite</span><input type="text" name="other" /> </span>
               </div>
