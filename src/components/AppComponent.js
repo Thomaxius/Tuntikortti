@@ -32,12 +32,18 @@ class AppComponent extends React.Component {
       return true
     }
 
+    console.log(newWorkday.workday_date_begin)
+
     for (let item of this.state.workdays) {
-      const workdayBeginsBeforeComparedBegins = moment(newWorkday.workday_date_begin).diff(moment(item.workday_date_begin), true) < 0
-      const workdayBeginsBeforeComparedEnds = moment(newWorkday.workday_date_begin).diff(moment(item.workday_date_end), true) < 0
-      const workdayEndsBeforeComparedBegins = moment(newWorkday.workday_date_end).diff(moment(item.workday_date_begin), true) < 0
-      const workdayEndsBeforeComparedEnds = moment(newWorkday.workday_date_end).diff(moment(item.workday_date_end), true) < 0
-      if ((!workdayBeginsBeforeComparedBegins && !workdayBeginsBeforeComparedEnds) || !workdayEndsBeforeComparedBegins) {
+      const workdayBeginsBeforeComparedBegins = (moment(newWorkday.workday_date_begin).diff(moment(item.workday_date_begin), true) < 0)
+      const workdayBeginsBeforeComparedEnds = (moment(newWorkday.workday_date_begin).diff(moment(item.workday_date_end), true) < 0)
+      const workdayEndsBeforeComparedBegins = (moment(newWorkday.workday_date_end).diff(moment(item.workday_date_begin), true) < 0)
+      const workdayEndsBeforeComparedEnds = (moment(newWorkday.workday_date_end).diff(moment(item.workday_date_end), true) < 0)
+
+      // Don't laugh, I was bashing my head in because of these
+      const condition1 = (workdayBeginsBeforeComparedBegins && workdayBeginsBeforeComparedEnds && workdayEndsBeforeComparedBegins && workdayEndsBeforeComparedEnds) 
+      const condition2 = (!workdayBeginsBeforeComparedBegins && !workdayBeginsBeforeComparedEnds && !workdayEndsBeforeComparedBegins && !workdayEndsBeforeComparedEnds)
+      if (!condition1 && !condition2) {
         return false
       }
     }
