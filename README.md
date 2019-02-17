@@ -17,4 +17,4 @@ What I have tried to implement is:
 Originally I was planning to integrate this project with Withings api, but sadly, their api isn't very good and I couldn't register a new application, so I had to just export CSV data and parse it manually to DB.
 
 
-This project is still very unpolished, but contains all the main features that I wanted to implement. If you are a recruiter, I would ideally like you to see this project as something that "has the right ideas" instead of "has everythign implemented perfectly"
+This project is still very unpolished, but contains all the main features that I wanted to implement. If you are a recruiter, I would ideally like you to see this project as something that "has the right ideas" instead of "has everything implemented perfectly"
