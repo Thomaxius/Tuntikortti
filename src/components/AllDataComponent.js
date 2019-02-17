@@ -23,7 +23,7 @@ export default class AllDataComponent extends React.Component {
       
       async getData() { // Fetch initial data
         this.setState({loading:true})
-        await axios.post(`http://localhost:3000/getalldata`, 
+        await axios.post(`${window.location.protocol}${window.location.hostname}:${window.location.port}/getalldata`, 
         {
           params: {
             startDate: this.state.startDate,
