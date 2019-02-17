@@ -14,7 +14,7 @@ class AddTohoily extends React.Component {
   }
 
     saveResult(tohoilyObj) {  // Send added object to server
-      axios.post(`http://localhost:3000/addtohoily`, 
+      axios.post(`${window.location.protocol}${window.location.hostname}:${window.location.port}/addtohoily`, 
       {
         params: {
           tohoily: tohoilyObj

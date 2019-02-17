@@ -3,7 +3,10 @@ import Loadable from 'react-loadable'
 import db from './db'
 import indexController from './controllers/serverController'
 import utils from "../src/utils"
+const os = require('os')
+const cors = require('cors')
 let bodyParser = require('body-parser')
+const HOSTNAME = os.hostname
 const PORT = 3000
 
 // initialize the application and create the routes
@@ -12,6 +15,7 @@ app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }))
+app.use(cors())
 
 app.post('/addworkdays', async (req, res) => {
     let result = null
@@ -124,12 +128,12 @@ app.use(indexController);
 
 // start the app
 Loadable.preloadAll().then(() => {
-    app.listen(PORT, (error) => {
+    app.listen(PORT, HOSTNAME, (error) => {
         if (error) {
             return console.log('something bad happened', error);
         }
 
-        console.log("listening on " + PORT + "...");
+        console.log(`Listening on ${HOSTNAME}:${PORT}..`);
     });
 });
 

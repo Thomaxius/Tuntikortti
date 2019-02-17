@@ -189,7 +189,7 @@ class ChartComponent extends React.Component {
 
   async getDataForWorkdayChart() { // Get data for charts
     this.setState({ loading: true })
-    await axios.post(`http://localhost:3000/getworkdaychartdata`,
+    await axios.post(`${window.location.hostname}:${window.location.port}/getworkdaychartdata`,
       {
         params: {
           startDate: this.state.startDate, // These are eithe user-supplied, or pre-defined by default
@@ -202,7 +202,7 @@ class ChartComponent extends React.Component {
 
   async getDataForRandomChart() { // Get data for chart2
     this.setState({ loading: true })
-    await axios.post(`http://localhost:3000/getrandomchartdata`,
+    await axios.post(`${window.location.hostname}:${window.location.port}/getrandomchartdata`,
       {
         params: {
           startDate: this.state.startDate, // These are eithe user-supplied, or pre-defined by default
@@ -215,7 +215,7 @@ class ChartComponent extends React.Component {
 
   async getDataForAverageChart() { // Get data for chart2
     this.setState({ loading: true })
-    await axios.post(`http://localhost:3000/getaveragechart`,
+    await axios.post(`${window.location.protocol}${window.location.hostname}:${window.location.port}/getaveragechart`,
       {
         params: {
           startDate: this.state.startDate, // These are either user-supplied, or pre-defined by default
