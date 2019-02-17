@@ -1,0 +1,50 @@
+{
+  "name": "tuntikortti",
+  "version": "0.1.0",
+  "private": false,
+  "homepage": "http://tommioffinland.fi",
+  "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/register": "^7.0.0",
+    "axios": "^0.18.0",
+    "babel-plugin-dynamic-import-node": "^2.0.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "c3": "^0.6.12",
+    "cors": "^2.8.5",
+    "express": "^4.16.2",
+    "file-loader": "^2.0.0",
+    "ignore-styles": "^5.0.1",
+    "moment": "^2.24.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-helmet": "^5.2.0",
+    "react-loadable": "^5.3.1",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^2.1.1",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
+    "sqlite3": "^4.0.6",
+    "url-loader": "^1.0.1"
+  },
+  "resolutions": {
+    "babel-core": "7.0.0-bridge.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "server": "node server/bootstrap.js"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.2.0"
+  }
+}

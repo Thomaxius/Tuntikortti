@@ -1,0 +1,135 @@
+
+@import url('https://fonts.googleapis.com/css?family=Barlow:regular,500,600,700,800');
+
+/* Style the header with a grey background and some padding */
+.header {
+    overflow: hidden;
+    background-color: #3F69A8;
+    width: 100%;
+    padding: 22px;
+    text-align: center;
+  }
+
+.header-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+  /* Style the header links */
+  .header a {
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-family: Barlow;
+    font-weight: bold;
+    line-height: 25px;
+    border-radius: 4px;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+
+  
+
+  li a, .dropbtn {
+    color: white;
+  }
+  
+  li a:hover, .dropdown:hover .dropbtn {
+    background-color: #333;
+  }
+  
+  li.dropdown {
+    display: block;
+    float: right;
+  }
+  li.dropdown:hover {
+    display: block;
+    float: right;
+  }
+  .dropdown-content {
+    z-index: 9999; /* This is for overriding c3 chart's position:relative */
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .dropdown-content a:hover {background-color: #f1f1f1}
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+body {
+    margin: auto;
+    font-family: Barlow;
+}
+
+.content {
+    padding-top: 20px;
+    max-width: 700px;
+    margin: auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 4px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+table.sumtable {
+    border-collapse: collapse;
+    width: 50%;
+}
+.bold {
+    font-weight: bold;
+}
+
+.error {
+    color: red
+}
+
+div.table 
+{
+    display:table;
+}
+
+form.tr, div.tr
+{
+    display:table-row;
+}
+
+SPAN.td
+{
+    display:table-cell;
+}
+
+SPAN.td_title
+{
+    display:table-row;
+}

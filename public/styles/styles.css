@@ -1,0 +1,88 @@
+
+@import url('https://fonts.googleapis.com/css?family=Barlow:regular,500,600,700,800');
+
+/* Style the header with a grey background and some padding */
+.header {
+    overflow: hidden;
+    background-color: #3F69A8;
+    width: 100%;
+    padding: 22px;
+    text-align: center;
+  }
+  
+  /* Style the header links */
+  .header a {
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-family: Barlow;
+    font-weight: bold;
+    line-height: 25px;
+    border-radius: 4px;
+    max-width: 50px;
+  }
+
+  #chart {
+    background: #fff;
+    width: 90%;
+    margin: 1em auto;
+  }
+
+body {
+    margin: auto;
+    font-family: Barlow;
+}
+
+.content {
+    padding-top: 20px;
+    max-width: 700px;
+    margin: auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 10%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 4px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+table.sumtable {
+    border-collapse: collapse;
+    width: 50%;
+}
+.bold {
+    font-weight: bold;
+}
+
+.error {
+    color: red
+}
+
+div.table 
+{
+    display:table;
+}
+
+form.tr, div.tr
+{
+    display:table-row;
+}
+
+SPAN.td
+{
+    display:table-cell;
+}
+
+SPAN.td_title
+{
+    display:table-row;
+}
