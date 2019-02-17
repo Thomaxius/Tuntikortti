@@ -40,7 +40,7 @@ class MainWorkdayComponent extends React.Component {
 
   async workdayIsValid(workdayObj) { // Called after user adds a new workday to punchcard
     let resultObj = {}
-    await axios.post(`${window.location.protocol}{window.location.hostname}:${window.location.port}/checkforoverlap`, // Check if there is a workday in the database that overlaps with this newly-added workday
+    await axios.post(`${window.location.protocol}${window.location.hostname}:${window.location.port}/checkforoverlap`, // Check if there is a workday in the database that overlaps with this newly-added workday
       {
         params: {
           workday: workdayObj
