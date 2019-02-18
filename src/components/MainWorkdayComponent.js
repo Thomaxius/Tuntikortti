@@ -97,7 +97,6 @@ class MainWorkdayComponent extends React.Component {
       }
     }).then((result) => {
       if (result.status === 200) {
-        console.log(result)
         alert(workday_amount + ' työpäivää lisätty tietokantaan.')
         this.clearState()
       }

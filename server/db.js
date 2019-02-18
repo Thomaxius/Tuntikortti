@@ -27,8 +27,8 @@ const addTohoily = async (tohoily) => {
 
 
 const getWorkdaysAndTohoilyt = async (startDate, endDate) => {
-    const sql = "select *, Cast ((JulianDay(w.workday_end) - JulianDay(w.workday_begin)) * 24 As Decimal) as workday_length, (select  count(*) from tohoilyt t where date(w.workday_begin) = date(t.date)) AS tohoilyt from workdays w WHERE date(w.workday_begin) >  date(?) and  date(w.workday_end) <  date(?) group by date(w.workday_begin)"
-    const sql1 = "select sum(Cast ((JulianDay(w.workday_end) - JulianDay(w.workday_begin)) * 24 As Decimal)) as total_hours, sum(merca_amount) as total_merca, sum(paulig_amount) as total_paulig, sum(fazer_amount) as total_fazer, sum(kesko_amount) as total_kesko, sum(other_amount) as total_other, sum(pahvit_amount) as total_pahvit, sum(messi_amount) as total_messi from workdays w WHERE date(w.workday_begin) >  date(?) and  date(w.workday_end) <  date(?)"
+    const sql = "select *, Cast ((JulianDay(w.workday_end) - JulianDay(w.workday_begin)) * 24 As Decimal) as workday_length, (select  count(*) from tohoilyt t where date(w.workday_begin) = date(t.date)) AS tohoilyt from workdays w WHERE date(w.workday_begin) >  date(?) and  date(w.workday_end) <  date(?) group by date(w.workday_begin) order by w.workday_begin desc"
+    const sql1 = "select sum(Cast ((JulianDay(w.workday_end) - JulianDay(w.workday_begin)) * 24 As Decimal)) as total_hours, sum(merca_amount) as total_merca, sum(paulig_amount) as total_paulig, sum(fazer_amount) as total_fazer, sum(kesko_amount) as total_kesko, sum(other_amount) as total_other, sum(pahvit_amount) as total_pahvit, sum(messi_amount) as total_messi from workdays w WHERE date(w.workday_begin) >  date(?) and  date(w.workday_end) <  date(?) order by w.workday_begin desc"
     const workdaysAndTohoilyt = await query(db, sql, [startDate, endDate])
     const totalSumOfTasks = await query(db, sql1, [startDate, endDate])
     return { workdaysAndTohoilyt: workdaysAndTohoilyt, totalSumOfTasks: totalSumOfTasks }
@@ -57,7 +57,7 @@ const getAllWorkdays = async () => {
 const getDataForWorkdayChart = async (startDate, endDate) => {
     const sql = `SELECT Cast ((JulianDay(w.workday_end) - JulianDay(w.workday_begin)) * 24 As Decimal) as workday_length, date(w.workday_begin) as date, (select  count(*) 
     from tohoilyt t where date(w.workday_begin) = date(t.date)) AS tohoilyt, COALESCE((select Cast ((JulianDay(s.sleep_to_date) - JulianDay(s.sleep_from_date)) * 24 As Decimal) from sleepdata s where date(w.workday_begin) = date(s.sleep_to_date) ),0) as sleep_amount 
-    FROM workdays w WHERE date(w.workday_begin) >  date(?) and  date(w.workday_end) <  date(?)`
+    FROM workdays w WHERE date(w.workday_begin) >  date(?) and  date(w.workday_end) <  date(?) order by w.workday_begin desc`
     const result = await query(db, sql, [startDate, endDate])
     return result
 }
@@ -68,7 +68,7 @@ const getDataForWeekdayAverageChart = async (startDate, endDate) => {
      (SELECT strftime('%w', workday_begin) as weekday, fazer_amount, merca_amount, paulig_amount, messi_amount, akaa_amount, kesko_amount, other_amount, workday_begin, workday_end, Cast ((JulianDay(workday_end) - JulianDay(workday_begin)) * 24 As Decimal) as hours
       FROM workdays ) subquery1
       where subquery1.weekday = sleepweekday and subquery1.workday_begin > date(?) and sleep_to_date > date(?) and subquery1.workday_end < date(?) and sleep_to_date < date(?)
-      group by strftime('%w', subquery1.workday_begin)`
+      group by strftime('%w', subquery1.workday_begin) order by workday_begin desc`
     const result = await query(db, sql, [startDate,startDate,endDate, endDate])
     return result
 }
@@ -76,7 +76,7 @@ const getDataForWeekdayAverageChart = async (startDate, endDate) => {
 const getDataForRandomChart = async (startDate, endDate) => {
     const sql = `SELECT sum(carbohydratesGrams) as carbohydrates, Cast ((JulianDay(w.workday_end) - JulianDay(w.workday_begin)) * 24 As Decimal) as workday_length,
     date(n.date) as date, steps, sum(calories) as calories, sum(sugar) as sugars, 
-    sum(proteinGrams) as proteins from nutrition n join steps s on date(n.date) = date(s.date) join workdays w on date(n.date) = date(w.workday_begin) WHERE date(w.workday_begin) >  date(?) and  date(w.workday_end) <  date(?) group by n.date`
+    sum(proteinGrams) as proteins from nutrition n join steps s on date(n.date) = date(s.date) join workdays w on date(n.date) = date(w.workday_begin) WHERE date(w.workday_begin) >  date(?) and  date(w.workday_end) <  date(?) group by n.date order by n.date desc`
     const result = await query(db, sql, [startDate, endDate])
     return result
 }

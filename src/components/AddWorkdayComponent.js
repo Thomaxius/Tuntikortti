@@ -136,7 +136,7 @@ class AddWorkday extends React.Component {
               <span className="td"><span className="td_title">Muut</span><input type="number" name="other_amount" /></span>
               <span className="td"><span className="td_title">Muu selite</span><input type="text" name="other" /> </span>
               </div>
-            <br/><button disabled={true ? this.state.error : false}>Add Workday</button>
+            <br/><button disabled={true ? this.state.error : false}>Lisää työpäivä tuntikorttiin</button>
             </form>
           </div>
           {this.state.error && <div className="error">{this.state.error}</div>}

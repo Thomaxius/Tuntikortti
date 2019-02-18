@@ -130,12 +130,12 @@ app.use(indexController);
 Loadable.preloadAll().then(() => {
     app.listen(PORT, HOSTNAME, (error) => {
         if (error) {
-            return console.log('something bad happened', error);
+            return console.log('Error on startup: ', error)
         }
 
-        console.log(`Listening on ${HOSTNAME}:${PORT}..`);
-    });
-});
+        console.log(`Listening on ${HOSTNAME}:${PORT}..`)
+    })
+})
 
 
 export default PORT

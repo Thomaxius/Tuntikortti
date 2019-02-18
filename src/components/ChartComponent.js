@@ -9,7 +9,7 @@ import moment from 'moment'
 
 const WorkdaysAndTohoilytchart = (state) => {
   const dataArrObj = state.workdayChartData
-  const dates = dataArrObj.map(x => moment(x.date).format('DD-MM-YY'))
+  const dates = dataArrObj.map(x => moment(x.date))
   const workday_length = dataArrObj.map(x => x.workday_length.toFixed(2))
   const tohoilyt = dataArrObj.map(x => x.tohoilyt)
   const sleep = dataArrObj.map((x) => x.sleep_amount.toFixed(2))
@@ -22,7 +22,7 @@ const WorkdaysAndTohoilytchart = (state) => {
     x: {
       label: "PVM",
       type: "timeseries",
-      tick: { format: "%y-%m-%d" }
+      tick: { format: "%d-%m-%y" }
     },
     y: {
       label: "Työtunnit",
@@ -54,7 +54,7 @@ const WorkdaysAndTohoilytchart = (state) => {
 }
 
 const nutrietsAndRandomChart = (state) => {
-  if (state.randomChartdata.length === 0 || state.loading) {
+  if (state.randomChartdata.length === 0 || state.workdayChartData.length === 0 ||state.loading) {
     if (state.loading) {
       return <div>Haetaan tietoja..</div>
     }
@@ -62,7 +62,7 @@ const nutrietsAndRandomChart = (state) => {
 
   const randomData = state.randomChartdata
   const workdayData = state.workdayChartData
-  const dates = randomData.map(x => moment(x.date).format('DD-MM-YY'))
+  const dates = randomData.map(x => moment(x.date))
   const carbohydrates = randomData.map(x => (x.carbohydrates / 10).toFixed(2))
   const steps = randomData.map(x => (x.steps / 1000).toFixed(2))
   const calories = randomData.map(x => (x.calories / 100).toFixed(2))
@@ -107,7 +107,7 @@ const nutrietsAndRandomChart = (state) => {
   const axis = {
     x: {
       type: 'timeseries',
-      tick: { format: "%y-%m-%d" }
+      tick: { format: "%d-%m-%y" }
     }
   }
 
